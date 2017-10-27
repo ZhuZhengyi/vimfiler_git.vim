@@ -61,7 +61,7 @@ function! s:column.define_syntax(context) "{{{
   \ contained containedin=vimfilerColumn__Git            
   syntax match   vimfilerColumn__GitStaged       '\[✚\]' 
   \ contained containedin=vimfilerColumn__Git            
-  syntax match   vimfilerColumn__GitUnstaged     '\[✭\]' 
+  syntax match   vimfilerColumn__GitUntracked     '\[✭\]' 
   \ contained containedin=vimfilerColumn__Git            
   syntax match   vimfilerColumn__GitRenamed      '\[➜\]' 
   \ contained containedin=vimfilerColumn__Git            
@@ -78,7 +78,7 @@ function! s:column.define_syntax(context) "{{{
 
   highlight def link  vimfilerColumn__GitModified Keyword
   highlight def link  vimfilerColumn__GitStaged   Special
-  highlight def link  vimfilerColumn__GitUnstaged Function
+  highlight def link  vimfilerColumn__GitUntracked Function
   highlight def link  vimfilerColumn__GitRenamed  Title
   highlight def link  vimfilerColumn__GitUnmerged Label
   highlight def link  vimfilerColumn__GitDeleted  Comment
