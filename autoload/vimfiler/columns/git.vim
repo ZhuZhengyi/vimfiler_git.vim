@@ -76,14 +76,14 @@ function! s:column.define_syntax(context) "{{{
   syntax match   vimfilerColumn__GitUnknown      '\[?\]' 
   \ contained containedin=vimfilerColumn__Git
 
-  highlight def link  vimfilerColumn__GitModified Special
-  highlight def link  vimfilerColumn__GitStaged   Function
-  highlight def link  vimfilerColumn__GitUnstaged Text
+  highlight def link  vimfilerColumn__GitModified Keyword
+  highlight def link  vimfilerColumn__GitStaged   Special
+  highlight def link  vimfilerColumn__GitUnstaged Function
   highlight def link  vimfilerColumn__GitRenamed  Title
   highlight def link  vimfilerColumn__GitUnmerged Label
-  highlight def link  vimfilerColumn__GitDeleted  Text
-  highlight def link  vimfilerColumn__GitDirty    Text
-  highlight def link  vimfilerColumn__GitClean    Text   
+  highlight def link  vimfilerColumn__GitDeleted  Comment
+  highlight def link  vimfilerColumn__GitDirty    Error
+  highlight def link  vimfilerColumn__GitClean    Ingore   
   highlight def link  vimfilerColumn__GitUnknown  Text   
 endfunction "}}}
 
@@ -119,6 +119,10 @@ function! s:git_state_to_name(symb)  " TODO: X, Y
         return "Unmodified"
     elseif a:symb == 'M'
         return "Modified"
+    elseif a:symb == '??'
+        return "Untracked"
+    elseif a:symb == 'T'
+        return "Modified"
     elseif a:symb == 'A'
         return "Staged"
     elseif a:symb == 'D'
@@ -128,7 +132,7 @@ function! s:git_state_to_name(symb)  " TODO: X, Y
     elseif (index(l:unmerged_states, a:symb) >= 0)
         return "Unmerged"
     else
-        return "Unmodified"
+        return "Unknown"
     endif
 endfunction
 
