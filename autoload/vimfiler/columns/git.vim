@@ -114,6 +114,7 @@ endfunction
 
 
 function! s:git_state_to_name(symb)  " TODO: X, Y
+    let l:unmerged_states  = ['DD', 'AU', 'UD', 'UA', 'DU', 'AA', 'UU']
     if a:symb == 'OK'
         return "Unmodified"
     elseif a:symb == 'M'
@@ -122,15 +123,13 @@ function! s:git_state_to_name(symb)  " TODO: X, Y
         return "Staged"
     elseif a:symb == 'D'
         return "Deleted"
-    else
     elseif a:symb == 'R'
         return "Renamed"
-    else
-    let unmerged_states  = ['DD', 'AU', 'UD', 'UA', 'DU', 'AA', 'UU']
-    elseif (index(symb, unmerged_states) >= 0)
+    elseif (index(l:unmerged_states, a:symb) >= 0)
         return "Unmerged"
+    else
+        return "Unmodified"
     endif
-
 endfunction
 
 function! s:git_state_to_symbol(s)
@@ -140,7 +139,8 @@ endfunction
 
 function! s:column.get(file, context) "{{{
     if(a:file.vimfiler__is_directory)
-        return '   '
+        return '[D]'
+        "return '   '
     endif
     let fname = a:file.vimfiler__filename
     let fullname = a:file.word
